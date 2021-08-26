@@ -1,15 +1,21 @@
-const { tokenTypes } = require('../config/tokens');
-
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Tokens', {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable('storages', {
       id: {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4,
         allowNull: false,
         primaryKey: true,
       },
-      token: {
+      location: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      file_key: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      filename: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -17,19 +23,6 @@ module.exports = {
         type: Sequelize.UUID,
         references: { model: 'Users', key: 'id' },
         allowNull: false,
-      },
-      type: {
-        type: Sequelize.ENUM,
-        values: [tokenTypes.REFRESH, tokenTypes.RESET_PASSWORD, tokenTypes.VERIFY_EMAIL],
-        allowNull: false,
-      },
-      expires: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      blacklisted: {
-        type: Sequelize.BOOLEAN,
-        default: false,
       },
       createdAt: {
         allowNull: false,
@@ -45,7 +38,7 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface) => {
-    return queryInterface.dropTable('Tokens');
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('storages');
   },
 };

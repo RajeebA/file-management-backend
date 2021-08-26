@@ -14,8 +14,15 @@ const password = (value, helpers) => {
   }
   return value;
 };
+const isRestrictedFileType = (file) => {
+  if (!file) return 'Invalid file or file not provided';
+  const fileType = file.originalname.split('.')[file.originalname.split('.').length - 1];
+  if (fileType !== 'pdf') return `${fileType} files are not supported`;
+  return null;
+};
 
 module.exports = {
   objectId,
   password,
+  isRestrictedFileType,
 };

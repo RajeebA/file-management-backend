@@ -1,4 +1,5 @@
 const { roles } = require('../config/roles');
+const hashPassword = require('../utils/hashPassword');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -40,5 +41,10 @@ module.exports = (sequelize, DataTypes) => {
   User.associate = function () {
     // associations can be defined here
   };
+  User.beforeCreate(async (user) => {
+    const hashedPassword = await hashPassword(user.password);
+    // eslint-disable-next-line no-param-reassign
+    user.password = hashedPassword;
+  });
   return User;
 };

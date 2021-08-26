@@ -24,6 +24,8 @@ const envVarsSchema = Joi.object()
     DB_DIALECT: Joi.string().description('database dialect').valid('mysql', 'sqlite', 'postgres', 'mssql'),
     DB_NAME: Joi.string().description('database name'),
     DB_PORT: Joi.number().description('database port').required(),
+    AWS_ACCESS_KEY_ID: Joi.string().description('aws access key ID').required(),
+    AWS_SECRET_ACCESS_KEY: Joi.string().description('aws secret access key').required(),
 
     // SMTP_HOST: Joi.string().description('server that will send the emails'),
     // SMTP_PORT: Joi.number().description('port to connect to the email server'),
@@ -88,5 +90,9 @@ module.exports = {
       },
     },
     from: envVars.EMAIL_FROM,
+  },
+  AWS: {
+    secret_access_key: envVars.AWS_SECRET_ACCESS_KEY,
+    acces_key_id: envVars.AWS_ACCESS_KEY_ID,
   },
 };
