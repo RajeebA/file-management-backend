@@ -4,7 +4,7 @@
   "description": "Create a Node.js app for building production-ready RESTful APIs using Express, by running one command",
   "bin": "bin/createNodejsApp.js",
   "main": "src/index.js",
-  "repository": "",
+  "repository": "https://github.com/RajeebA/file-management-backend.git",
   "author": "Rajeeb <rajeeb@riafy.me>",
   "license": "",
   "engines": {
